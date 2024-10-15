@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d87f0;
+            font-size: 3rem;
+            margin-top: 150px;
+            margin-bottom: 100px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+
+        button {
+            background-color: #2d87f0;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            width: 200px;
+        }
+
+        button:hover {
+            background-color: #1c5fb8;
+        }
+
+        .first {
+            background-color: #28a745;
+        }
+
+        .first:hover {
+            background-color: #218838;
+        }
+
+        .second {
+            background-color: #6c757d;
+        }
+
+        .second:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+<h1>ZOOM <br>WORKPLACE</h1>
+
+<div class="container">
+    <form th:action="@{/joinMeeting}">
+        <button class="first">Join a meeting</button>
+    </form>
+    <form th:action="@{/user/signUp}">
+        <button class="second">Sign up</button>
+    </form>
+    <form th:action="@{/user/login}">
+        <button class="second">Sign in</button>
+    </form>
+</div>
+</body>
+</html>

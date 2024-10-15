@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #0077cc;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        form[th\\:action="@{/userDashboard}"] button {
+            background-color: #f44336;
+            margin-top: 20px;
+        }
+
+        form[th\\:action="@{/userDashboard}"] button:hover {
+            background-color: #d32f2f;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome to Zoom</h2>
+    <div class="button-container">
+        <form th:action="@{/meeting-controller/scheduleMeeting}" th:object="${meeting}" method="post">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:field="*{title}">
+
+            <label for="datetime">Date and Time:</label>
+            <input type="datetime-local" id="datetime" name="datetime" th:field="*{dateTime}">
+
+            <label for="invitees">Invitees:</label>
+            <input type="text" id="invitees" name="invitees">
+
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" th:field="*{duration}">
+
+            <button type="submit">Schedule Meeting</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <form th:action="@{/userDashboard}">
+        <button type="button">Cancel</button>
+    </form>
+</div>
+</body>
+</html>
