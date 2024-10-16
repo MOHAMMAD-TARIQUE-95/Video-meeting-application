@@ -22,21 +22,21 @@ public class MeetingController {
     private final MeetingService meetingService;
     private final UserService userService;
     private final InviteService inviteService;
-//    private final EmailService emailService;
+    private final EmailService emailService;
 
-//    @Autowired
-//    public MeetingController(MeetingService meetingService, UserService userService, InviteService inviteService, EmailService emailService) {
-//        this.meetingService = meetingService;
-//        this.userService = userService;
-//        this.inviteService = inviteService;
-//        this.emailService = emailService;
-//    }
     @Autowired
-    public MeetingController(MeetingService meetingService, UserService userService, InviteService inviteService) {
+    public MeetingController(MeetingService meetingService, UserService userService, InviteService inviteService, EmailService emailService) {
         this.meetingService = meetingService;
         this.userService = userService;
         this.inviteService = inviteService;
+        this.emailService = emailService;
     }
+//    @Autowired
+//    public MeetingController(MeetingService meetingService, UserService userService, InviteService inviteService) {
+//        this.meetingService = meetingService;
+//        this.userService = userService;
+//        this.inviteService = inviteService;
+//    }
 
     @GetMapping("/scheduleMeeting")
     public String scheduleMeeting(Model model) {

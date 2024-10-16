@@ -21,8 +21,8 @@ public class SecurityConfig {
     @Autowired
     private DataSource dataSource;
 
-//    @Autowired
-//    private OAuthAuthenticationSuccessHandler handler;
+    @Autowired
+    private OAuthAuthenticationSuccessHandler handler;
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -61,10 +61,10 @@ public class SecurityConfig {
                                 .defaultSuccessUrl("/userDashboard")
                                 .permitAll()
                 )
-//                .oauth2Login(oauth -> oauth
-//                        .loginPage("/login")
-//                        .successHandler(handler)
-//                )
+                .oauth2Login(oauth -> oauth
+                        .loginPage("/login")
+                        .successHandler(handler)
+                )
                 .logout(logout -> logout.permitAll()
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
