@@ -1,0 +1,65 @@
+package com.videoMeetingApplication.controllers;
+
+import com.videoMeetingApplication.entity.Role;
+import com.videoMeetingApplication.entity.User;
+import com.videoMeetingApplication.service.RoleService;
+import com.videoMeetingApplication.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("user")
+public class UserController {
+
+    private UserService userService;
+    private RoleService roleService;
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserController(UserService userService, RoleService roleService,BCryptPasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.passwordEncoder=passwordEncoder;
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model, @RequestParam(required = false) String error) {
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password");
+        }
+        return "sign-in";
+    }
+
+    @GetMapping("/homepage")
+    public String homePage() {
+        return "user-dashboard";
+    }
+
+    @GetMapping("/signUp")
+    public String signUp(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "sign-up";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute User user, Model model) {
+        User existingUser = userService.findUserByEmail(user.getEmail());
+        if (existingUser != null) {
+            model.addAttribute("errorMessage", "User already exists!");
+            return "sign-up";
+        }
+
+        Role role = new Role();
+        role.setRole("ADMIN");
+        role.setUsername(user.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        roleService.saveRole(role);
+        userService.createUser(user);
+        return "sign-in";
+    }
+}

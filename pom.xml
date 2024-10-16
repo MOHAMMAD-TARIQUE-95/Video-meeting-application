@@ -10,10 +10,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.zoom</groupId>
-    <artifactId>Zoom-clone</artifactId>
+    <groupId>com.videoMeetingApplication</groupId>
+    <artifactId>Video-meeting-application</artifactId>
     <version>1.0</version>
-    <description>Zoom Clone Project</description>
+    <description>Video meeting application</description>
 
     <properties>
         <java.version>17</java.version>
